@@ -1,36 +1,43 @@
 from fastapi import FastAPI
 from models import Caballero
-
+from models import Material
 app = FastAPI()
 
 
-caballeros = []
+caballeros = [
+    Caballero(id=1, name="Nameless King", material=Material.BRONCE, attack=250000, constelation="Pico del archidragon"),
+    Caballero(id=2, name="Orstein", material=Material.PLATA, attack=300000, constelation="Anor londo"),
+    Caballero(id=3, name="Fortissax", material=Material.ORO, attack=100000, constelation="Raiz profunda"),
+]
 
 
 
 @app.get("/showallcaballeros")
-def showallcaballeros():
-    return [c.showcaballero() for c in caballeros]
+def show_all_caballeros():
+    return [caballero.showcaballero() for caballero in caballeros]
 
-@app.get("/showyourcaballero/{id}")
-def showyourcaballero(id: int):
-    for c in caballeros:
-        if c.id == id:
-            return c.showcaballero()
+
+@app.get("/showyourcaballero/{caballero_id}")
+def show_your_caballero(caballero_id: int):
+    for caballero in caballeros:
+        if caballero.id == caballero_id:
+            return caballero.showcaballero()
     return {"error": "Caballero no encontrado"}
 
-@app.get("/fightcaballero/{id}")
-def fightcaballero(id: int):
-    for c in caballeros:
-        if c.id == id:
-            return c.fightcaballero()
+
+@app.get("/fightcaballero/{caballero_id}")
+def fight_caballero(caballero_id: int):
+    for caballero in caballeros:
+        if caballero.id == caballero_id:
+            return caballero.fightcaballero()
     return {"error": "Caballero no encontrado"}
 
-@app.get("/showconstelation/{id}")
-def showconstelation(id: int):
-    for c in caballeros:
-        if c.id == id:
-            return c.showconstelation()
+
+@app.get("/showconstelation/{caballero_id}")
+def show_constelation(caballero_id: int):
+    for caballero in caballeros:
+        if caballero.id == caballero_id:
+            return caballero.showconstelation()
     return {"error": "Caballero no encontrado"}
 
 

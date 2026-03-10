@@ -14,6 +14,7 @@ class Caballero(BaseModel):
     attack: int
     constelation: str
 
+
     def showcaballero(self):
         return f"Caballero {self.name} con armadura {self.material.name}"
 
