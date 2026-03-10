@@ -22,3 +22,4 @@ class Caballero(BaseModel):
 
     def showconstelation(self):
         return f"Constelación: {self.constelation}"
+    s
